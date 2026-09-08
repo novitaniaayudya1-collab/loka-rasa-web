@@ -131,27 +131,6 @@
       display: block;
     }
 
-    /* BANNER TENTANG KAMI */
-    .page-header {
-      background: linear-gradient(135deg, var(--primary-mocha) 0%, #4A3227 100%);
-      color: white;
-      text-align: center;
-      padding: 45px 20px;
-    }
-
-    .page-header h1 {
-      font-size: 28px;
-      font-weight: 800;
-      margin-bottom: 6px;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .page-header p {
-      font-size: 14px;
-      font-weight: 400;
-      opacity: 0.9;
-    }
-
     /* STYLING SECTION & ALTERNATING BG */
     section {
       padding: 50px 20px;
@@ -197,7 +176,7 @@
       border-radius: 2px;
     }
 
-    /* 1. CERITA LOKA RASA */
+    /* 1. CERITA LOKA RASA & SLIDESHOW FOTO */
     .story-card {
       background: var(--card-white);
       border: 1px solid var(--border-line);
@@ -216,11 +195,33 @@
       }
     }
 
-    .story-image {
+    .slideshow-container {
+      position: relative;
       width: 100%;
       height: 250px;
-      object-fit: cover;
       border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .story-text {
@@ -396,12 +397,6 @@
     </nav>
   </header>
 
-  <!-- BANNER TENTANG KAMI -->
-  <div class="page-header">
-    <h1>Tentang Kami</h1>
-    <p>Mengenal lebih dekat dedikasi dan perjalanan rasa kami</p>
-  </div>
-
   <!-- 1. SECTION CERITA LOKA RASA -->
   <section class="section-light">
     <div class="section-container">
@@ -410,10 +405,26 @@
       <p class="section-subtitle">Awal mula perjalanan manis kreasi pastry dan cake kami.</p>
 
       <div class="story-card">
-        <img src="images/Toko Loka Rasa.jpg" alt="Suasana Dapur Loka Rasa" class="story-image">
+        <!-- Slideshow Foto Otomatis 3 Detik -->
+        <div class="slideshow-container">
+          <div class="slide active">
+            <img src="images/Toko Loka Rasa.jpg" alt="Suasana Toko 1">
+          </div>
+          <div class="slide">
+            <img src="images/toko2.jpg" alt="Suasana Toko 2">
+          </div>
+          <div class="slide">
+            <img src="images/toko3.jpg" alt="Suasana Toko 3">
+          </div>
+        </div>
+
+        <!-- Teks Singkat -->
         <div class="story-text">
           <p>
-            Loka Rasa hadir untuk menghadirkan berbagai pilihan bakery dan dessert yang dibuat dari bahan berkualitas, segar, dan halal. Kami percaya bahwa setiap sajian dapat menjadi bagian dari momen bahagia, sehingga kami selalu mengutamakan kualitas produk dan pelayanan terbaik bagi setiap pelanggan Nama "Loka Rasa" mencerminkan ruang atau tempat di mana setiap orang dapat menemukan kehangatan dan kebahagiaan melalui citra rasa yang otentik.
+            Loka Rasa menyajikan pilihan bakery dan dessert segar, otentik, dan halal yang dibuat dari bahan-bahan pilihan berkualitas tinggi.
+          </p>
+          <p>
+            Nama <strong>"Loka Rasa"</strong> bermakna tempat bertemunya kehangatan dan kebahagiaan lewat cita rasa yang selalu menemani momen manismu.
           </p>
         </div>
       </div>
@@ -514,9 +525,22 @@
     © 2026 Loka Rasa
   </footer>
 
-  <!-- SCRIPT UNTUK ANIMASI ANGKA STATISTIK BERGERAK -->
+  <!-- SCRIPT UNTUK SLIDESHOW & ANIMASI ANGKA STATISTIK -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. SCRIPT SLIDESHOW FOTO 3 DETIK
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+
+      if (slides.length > 0) {
+        setInterval(() => {
+          slides[currentSlide].classList.remove('active');
+          currentSlide = (currentSlide + 1) % slides.length;
+          slides[currentSlide].classList.add('active');
+        }, 3000);
+      }
+
+      // 2. SCRIPT ANIMASI STATISTIK
       const counters = document.querySelectorAll('.stat-number');
       let started = false;
 
