@@ -198,7 +198,7 @@
     .slideshow-container {
       position: relative;
       width: 100%;
-      height: 250px;
+      height: 290px;
       border-radius: 10px;
       overflow: hidden;
     }
@@ -227,16 +227,54 @@
     .story-text {
       font-size: 13.5px;
       color: var(--text-dark);
-      line-height: 1.8;
+      line-height: 1.6;
       font-weight: 400;
     }
 
-    .story-text p {
-      margin-bottom: 12px;
+    /* Styling Tambahan untuk Kartu Kecil Samping Foto */
+    .story-intro {
+      border-left: 3px solid var(--secondary-caramel);
+      padding-left: 12px;
+      margin-bottom: 16px;
+      color: var(--text-dark);
+      font-size: 13px;
     }
 
-    .story-text p:last-child {
-      margin-bottom: 0;
+    .story-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .feature-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background-color: var(--accent-butter);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-line);
+    }
+
+    .feature-icon {
+      font-size: 16px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .feature-card strong {
+      display: block;
+      font-size: 13px;
+      color: var(--primary-mocha);
+      margin-bottom: 2px;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.4;
     }
 
     /* 2 & 3. VISI & MISI GRID */
@@ -418,14 +456,37 @@
           </div>
         </div>
 
-        <!-- Teks Singkat -->
+        <!-- Teks Berstruktur Kartu (Santai & Tidak Kaku) -->
         <div class="story-text">
-          <p>
-            Loka Rasa menyajikan pilihan bakery dan dessert segar, otentik, dan halal yang dibuat dari bahan-bahan pilihan berkualitas tinggi.
+          <p class="story-intro">
+            Berawal dari kecintaan pada dessert dan keinginan untuk menghadirkan sesuatu yang manis untuk setiap momen. <strong>Loka Rasa</strong> hadir dengan berbagai pilihan bakery dan dessert yang dibuat dengan bahan berkualitas dan rasa yang kami sukai.
           </p>
-          <p>
-            Nama <strong>"Loka Rasa"</strong> bermakna tempat bertemunya kehangatan dan kebahagiaan lewat cita rasa yang selalu menemani momen manismu.
-          </p>
+
+          <div class="story-features">
+            <div class="feature-card">
+              <span class="feature-icon">🍓</span>
+              <div>
+                <strong>Bahan Berkualitas</strong>
+                <p>Menggunakan bahan yang segar dan dipilih dengan baik.</p>
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <span class="feature-icon">🤎</span>
+              <div>
+                <strong>Dibuat dengan Perhatian</strong>
+                <p>Setiap dessert disiapkan dengan teliti agar rasanya tetap nikmat.</p>
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <span class="feature-icon">✨</span>
+              <div>
+                <strong>Untuk Setiap Momen</strong>
+                <p>Teman manis untuk menemani hari-hari dan momen spesialmu.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
