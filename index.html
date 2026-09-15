@@ -11,34 +11,499 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
- /* PERBAIKAN NAVBAR HP TANPA MENGUBAH STRUKTUR */
-  @media (max-width: 768px) {
-    nav, .navbar, header {
-      display: flex !important;
-      justify-content: space-between !important;
-      align-items: center !important;
-      padding: 10px 12px !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
+  /* PALET WARNA DENGAN KONTRAS TINGGI & HARMONIS */
+    :root {
+      --bg-warm: #FDFBF7;           /* Neutral Cream */
+      --bg-alt: #F7EFE9;            /* Slightly Darker Warm Cream for Alternating Sections */
+      --text-dark: #2B1E1A;         /* Dark Mocha Brown for High Contrast Text */
+      --text-muted: #5C4A42;        /* Muted Brown for Subtitles */
+      --primary-mocha: #6D4C3D;     /* Primary Accent */
+      --secondary-caramel: #B86B35;  /* Secondary Accent / Buttons */
+      --accent-butter: #FFF5EC;     /* Light Card Background */
+      --card-white: #FFFFFF;        /* Pure White Card */
+      --border-line: #E2D0C5;       /* Subtle Border */
+      --badge-red: #C0392B;        /* High Contrast Badge Red */
     }
 
-    nav a, .navbar a, .logo {
-      font-size: 0.95rem !important;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    nav ul, .navbar ul, .nav-links {
-      display: flex !important;
-      gap: 8px !important;
-      padding: 0 !important;
-      margin: 0 !important;
+    body {
+      background-color: var(--bg-warm);
+      color: var(--text-dark);
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
     }
 
-    nav ul li a, .navbar ul li a, .nav-links a {
-      font-size: 0.75rem !important;
-      white-space: nowrap !important;
-      padding: 2px 4px !important;
+    /* HEADER & NAVBAR */
+    header {
+      background-color: var(--card-white);
+      padding: 16px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(43, 30, 26, 0.05);
+      border-bottom: 1px solid var(--border-line);
     }
-  }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary-mocha);
+      text-decoration: none;
+      letter-spacing: 0.8px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+    }
+
+    nav li {
+      position: relative;
+      margin-left: 22px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 14px;
+      padding: 8px 0;
+      display: inline-block;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--secondary-caramel);
+    }
+
+    .dropdown-btn::after {
+      content: ' ▾';
+      font-size: 11px;
+      margin-left: 3px;
+    }
+
+    /* DROPDOWN MENU */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: var(--card-white);
+      min-width: 190px;
+      box-shadow: 0 8px 20px rgba(43, 30, 26, 0.12);
+      border-radius: 8px;
+      padding: 8px;
+      border: 1px solid var(--border-line);
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 9px 12px;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 13px;
+      text-decoration: none;
+      border-radius: 4px;
+      border-bottom: 1px solid #EFE4DC;
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown-menu a:hover {
+      background-color: var(--accent-butter);
+      color: var(--primary-mocha);
+    }
+
+    nav li:hover .dropdown-menu {
+      display: block;
+    }
+
+    /* HERO CONTAINER */
+    .hero-container {
+      max-width: 620px;
+      margin: 40px auto 30px auto;
+      padding: 0 20px;
+    }
+
+    .hero-card {
+      background-color: var(--card-white);
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(43, 30, 26, 0.08);
+      border: 1px solid var(--border-line);
+      text-align: center;
+      padding: 16px 16px 25px 16px;
+    }
+
+    .slider-wrapper {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+      background-color: #2B1E1A;
+      border-radius: 12px;
+    }
+
+    .slides-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 12px;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(43, 30, 26, 0.7);
+      color: white;
+      border: none;
+      font-size: 14px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+
+    .slider-btn:hover {
+      background: var(--primary-mocha);
+    }
+
+    .prev-btn { left: 10px; }
+    .next-btn { right: 10px; }
+
+    .slider-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .dot.active {
+      background: white;
+      transform: scale(1.3);
+    }
+
+    .hero-content {
+      padding: 20px 10px 0 10px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--primary-mocha);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .hero-tagline {
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: var(--secondary-caramel);
+      color: #FFFFFF;
+      padding: 10px 22px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      transition: background-color 0.3s, transform 0.2s;
+      border: 2px solid var(--secondary-caramel);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-mocha);
+      border-color: var(--primary-mocha);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background-color: transparent;
+      color: var(--primary-mocha);
+      padding: 10px 22px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      transition: background-color 0.3s, color 0.3s, transform 0.2s;
+      border: 2px solid var(--primary-mocha);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-mocha);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* SECTION STYLING & ALTERNATING BACKGROUNDS */
+    section {
+      padding: 50px 20px;
+    }
+
+    .section-light {
+      background-color: var(--bg-warm);
+    }
+
+    .section-alt {
+      background-color: var(--bg-alt);
+      border-top: 1px solid var(--border-line);
+      border-bottom: 1px solid var(--border-line);
+    }
+
+    .section-container {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--primary-mocha);
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    /* ELEMEN PEMISAH (DIVIDER) */
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background-color: var(--secondary-caramel);
+      margin: 0 auto 12px auto;
+      border-radius: 2px;
+    }
+
+    /* 1. SECTION PROMO SPESIAL */
+    .promo-banner {
+      background: linear-gradient(135deg, #FFF0E5 0%, #F3D2C1 100%);
+      border: 1px dashed var(--secondary-caramel);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(184, 107, 53, 0.08);
+    }
+
+    .promo-badge {
+      display: inline-block;
+      background-color: var(--badge-red);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .promo-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: #2B1E1A;
+      margin-bottom: 6px;
+    }
+
+    .promo-desc {
+      font-size: 13px;
+      color: #4A3A35;
+    }
+
+    /* GRID LAYOUTS */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    /* 2. BEST SELLER CARDS */
+    .bestseller-card {
+      background: var(--card-white);
+      border: 1px solid var(--border-line);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 3px 10px rgba(43, 30, 26, 0.05);
+      position: relative;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .bestseller-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(43, 30, 26, 0.1);
+    }
+
+    .bestseller-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background-color: var(--secondary-caramel);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      z-index: 2;
+    }
+
+    .bestseller-card img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+    .bestseller-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+
+    .bestseller-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--secondary-caramel);
+    }
+
+    /* 3. FEATURE CARDS (MENGAPA MEMILIH KAMI) */
+    .feature-card {
+      background: var(--card-white);
+      border: 1px solid var(--border-line);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 2px 8px rgba(43, 30, 26, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(109, 76, 61, 0.12);
+      border-color: var(--secondary-caramel);
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-mocha);
+      margin-bottom: 6px;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* 4. TESTIMONI CARDS */
+    .testimonial-card {
+      background: var(--card-white);
+      border: 1px solid var(--border-line);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 3px 10px rgba(43, 30, 26, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stars {
+      color: #E67E22;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-text {
+      font-size: 13px;
+      color: #333;
+      font-style: italic;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .testimonial-author {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-mocha);
+      border-top: 1px dashed var(--border-line);
+      padding-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      background-color: var(--card-white);
+      border-top: 1px solid var(--border-line);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
 
   <!-- NAVBAR -->
   <header>
